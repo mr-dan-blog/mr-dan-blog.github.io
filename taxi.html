@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taxi Problem Sovler</title>
+</head>
+<body>
+    <div>
+        <label for="inputString">Distances (comma separated):</label><br>
+        <input type="text" id="inputString" size="50">
+    </div>
+
+    <br>
+
+    <div>
+        <h3>Select Algorithm:</h3>
+        <input type="radio" id="op1" name="algorithm" value="equal-split" checked>
+        <label for="op1">Equal fare</label><br>
+
+        <input type="radio" id="op2" name="algorithm" value="marginal">
+        <label for="op2">Marginal fare</label><br>
+
+        <input type="radio" id="op3" name="algorithm" value="equal-discount">
+        <label for="op3">Equal discounts</label><br>
+
+        <input type="radio" id="op4" name="algorithm" value="equal-discount-flooring">
+        <label for="op4">Equal discounts, avoid negatives</label><br>
+
+        <input type="radio" id="op5" name="algorithm" value="person-miles-proportional">
+        <label for="op5">Proportional to person-miles</label><br>
+
+        <input type="radio" id="op6" name="algorithm" value="segmented">
+        <label for="op6">Split by segment</label><br>
+
+        <input type="radio" id="op7" name="algorithm" value="talmudic">
+        <label for="op7">Game-theoretic (Talmudic)</label><br>
+    </div>
+
+    <br>
+
+    <button onclick="processString()">Submit</button>
+
+    <br><br>
+
+    <div>
+        <h3>Result:</h3>
+        <div id="result">No result yet</div>
+    </div>
+
+    <script>
+        function indexSorted(arr) {
+            const indexed = Array.from( arr.entries() );
+            return indexed.toSorted( (a, b) => a[1] - b[1] );
+        }
+
+        function equalSplit(distances) {
+            const fare = Math.max(...distances) / distances.length;
+            return Array(distances.length).fill(fare);
+        }
+
+        function marginal(distances) {
+            let out = Array();
+
+            let running_max = 0;
+            for (let i = 0; i < distances.length; i++) {
+                out.push( Math.max( distances[i] - running_max, 0 ) );
+                running_max = Math.max( distances[i], running_max );
+            }
+
+            return out;
+        }
+
+        function equalDiscount(distances, flooring) {
+            let individual_savings;
+            let rider, distance;
+
+            let out = Array(distances.length).fill(0);
+            let sorted = indexSorted(distances);
+            let remaining_savings = distances.reduce( (a, b) => a+b, 0 ) - Math.max(...distances);
+
+            for (let i = 0; i < distances.length; i++) {
+                [rider, distance] = sorted[i];
+                individual_savings = remaining_savings / (distances.length - i);
+
+                if (flooring && individual_savings > distance) {
+                    remaining_savings -= distance;
+                } else {
+                    out[rider] = distance - individual_savings;
+                    remaining_savings -= individual_savings;
+                }
+            }
+            return out;
+        }
+
+        function proportional(distances) {
+            const scale = Math.max(...distances) / distances.reduce( (a, b) => a+b, 0 );
+            return distances.map( (d) => scale * d );
+        }
+
+        function segmented(distances) {
+            let cost_each;
+            let segment_length;
+
+            let out = Array(distances.length).fill(0);
+            let sorted = indexSorted(distances);
+
+            for (let i = 0; i < sorted.length; i++) {
+                segment_length = sorted[i][1];
+                cost_each = segment_length / (sorted.length - i);
+                for (let j = i; j < sorted.length; j++) {
+                    out[sorted[j][0]] += cost_each;
+                    sorted[j][1] -= segment_length;
+                }
+            }
+            return out;
+        }
+
+        function talmudic(distances) {
+            const person_miles = distances.reduce( (a, b) => a+b, 0 );
+            const fare = Math.max(...distances)
+
+            if  (fare <= person_miles/2) {
+                return talmudic_helper(distances, fare);
+            } else {
+                const discounts = talmudic_helper(distances, person_miles - fare);
+                return distances.map( (distance, i) => distance - discounts[i] );
+            }
+        }
+        // assumes amount owed is less than half of total
+        function talmudic_helper(distances, owed) {
+            let person, distance;
+            let out = Array(distances.length);
+            const sorted = indexSorted(distances);
+
+            let i = 0;
+            while ( sorted[i][1]/2 < owed/(sorted.length - i) ) { // while next unpaid person can be paid half their distance
+                [person, distance] = sorted[i];
+                out[person] = distance/2;
+                owed -= distance/2;
+                i++;
+                console.log("in loop 1");
+            }
+            const remaining_shares = owed/(sorted.length - i);
+            while (i < sorted.length) {
+                person = sorted[i][0];
+                out[person] = remaining_shares;
+                i++
+                console.log("in loop 2");
+            }
+            return out;
+
+        }
+
+        function processString() {
+            const input = document.getElementById('inputString').value;
+            const distances = input.split(",").map( (s) => Number(s.trim()) );
+            const selectedOp = document.querySelector('input[name="algorithm"]:checked').value;
+            let result;
+
+            switch(selectedOp) {
+                case 'equal-split':
+                    result = equalSplit(distances);
+                    break;
+                case 'marginal':
+                    result = marginal(distances);
+                    break;
+                case 'equal-discount':
+                    result = equalDiscount(distances, false);
+                    break;
+                case 'equal-discount-flooring':
+                    result = equalDiscount(distances, true);
+                    break;
+                case 'person-miles-proportional':
+                    result = proportional(distances);
+                    break;
+                case 'segmented':
+                    result = segmented(distances);
+                    break;
+                case 'talmudic':
+                    result = talmudic(distances);
+                    break;
+                default:
+                    result = 'Invalid algorithm';
+            }
+            let formatted = result.map((r) => "$" + r.toFixed(2));
+            formatted = formatted.join(", ");
+            document.getElementById('result').textContent = formatted;
+        }
+    </script>
+</body>
+</html>
