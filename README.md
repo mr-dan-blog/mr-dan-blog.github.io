@@ -1,2 +1,2 @@
-# mr-dan-blog.github.io
-Tinkerings from Mr. Dan / Danonymous
+# Mr. Dan
+Tinkerings from Mr. Dan (Danonymous)
