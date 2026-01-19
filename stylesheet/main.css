@@ -18,6 +18,7 @@
   --border: color-mix(in srgb, var(--text) 12%, transparent);
   --font-small: 0.95rem;
   --radius: 3px;
+  --radius-lg: 12px;
 
   --font-header: Sirba, serif;
   --font-body: Raleway, system-ui, sans-serif;
@@ -320,10 +321,29 @@ footer > span {
    Full documentation: robertbirming.com/bearming
    ============================================================ */
 
-/* Footnote reference arrow */
+/* card class (Dan) */
+.card {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    box-sizing: border-box;
+    padding: 1rem;
+}
+
+
+/* Footnote reference arrow (Dan) */
 .footnote {
     font-family: var(--font-code);
     padding-left: 0.5rem;
+}
+
+/* Buttons (Dan) */
+button {
+    padding: 10px 15px;
+    background-color: #ddd;
+    border-radius: 5px;
+    border: 0;
+    font-family: var(--body);
+    font-size: 1.0rem;
 }
 
 
