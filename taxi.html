@@ -1,53 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link type="text/css" rel="stylesheet" href="/stylesheet/main.css" />
+<!--     <link type="text/css" rel="stylesheet" href="/stylesheet/main.css" /> -->
+    <link type="text/css" rel="stylesheet" href="/media/dan/data/Libraries/Code/web/mr-dan-blog.github.io/stylesheet/main.css" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Taxi Problem Sovler</title>
 </head>
 <body>
-    <div>
-        <label for="inputString">Distances (comma separated):</label><br>
-        <input type="text" id="inputString" size="50">
+    <h1>Taxi Problem Calculator</h1>
+    <p>This calculator accompanies <a href="https://danonymous.bearblog.dev/taxi/">a blog post</a> about how to fairly split cab fare.</p>
+    <div class="card">
+        <h2 style="margin-top: 0px">Calculator</h2>
+        <div>
+            <label for="inputString">Distances (comma separated):</label><br>
+            <input type="text" id="inputString" size="50">
+        </div>
+
+        <div>
+            <h3>Select an algorithm:</h3>
+            <input type="radio" id="op1" name="algorithm" value="equal-split" checked>
+            <label for="op1">Equal fare</label><br>
+
+            <input type="radio" id="op2" name="algorithm" value="marginal">
+            <label for="op2">Marginal fare</label><br>
+
+            <input type="radio" id="op3" name="algorithm" value="equal-discount">
+            <label for="op3">Equal discounts</label><br>
+
+            <input type="radio" id="op4" name="algorithm" value="equal-discount-flooring">
+            <label for="op4">Equal discounts, avoid negatives</label><br>
+
+            <input type="radio" id="op5" name="algorithm" value="person-miles-proportional">
+            <label for="op5">Proportional to person-miles</label><br>
+
+            <input type="radio" id="op6" name="algorithm" value="segmented">
+            <label for="op6">Split by segment</label><br>
+
+            <input type="radio" id="op7" name="algorithm" value="talmudic">
+            <label for="op7">Game-theoretic (Talmudic)</label><br>
+        </div>
+
+        <br>
+
+        <button onclick="processString()">Calculate</button>
+
+        <br><br>
+
+        <div>
+            <h3>Results</h3>
+            <div id="result"><i>Enter distances and hit "Calculate"</i></div>
+        </div>
     </div>
 
     <br>
 
-    <div>
-        <h3>Select Algorithm:</h3>
-        <input type="radio" id="op1" name="algorithm" value="equal-split" checked>
-        <label for="op1">Equal fare</label><br>
+    <h2>The algorithms</h2>
+    <h3>Equal fare</h3>
+    <p>Every rider pays the same amount.</p>
 
-        <input type="radio" id="op2" name="algorithm" value="marginal">
-        <label for="op2">Marginal fare</label><br>
+    <h3>Marginal fare</h3>
+    <p>Each rider pays the amount they contributed to the distance. This algorithm is order-dependent, so if the second passenger goes less far than the first then the second passenger will pay nothing.</p>
 
-        <input type="radio" id="op3" name="algorithm" value="equal-discount">
-        <label for="op3">Equal discounts</label><br>
+    <h3>Equal discounts</h3>
+    <p>We first calculate the savings from sharing as compared to the sum of the costs of separate rides. That savings is distributed equally among all riders.</p>
 
-        <input type="radio" id="op4" name="algorithm" value="equal-discount-flooring">
-        <label for="op4">Equal discounts, avoid negatives</label><br>
+    <h3>Equal discounts, avoid negatives</h3>
+    <p>Like equal discounts, but without the issue that short-riders sometimes profit instead of paying in. If a contribution would be negative, that rider pays $0.00 and their remaining savings is distributed among the other riders.</p>
 
-        <input type="radio" id="op5" name="algorithm" value="person-miles-proportional">
-        <label for="op5">Proportional to person-miles</label><br>
+    <h3>Proportional to person-miles</h3>
+    <p>We first calculate the savings from sharing as compared to the sum of the costs of separate rides. That savings is distributed among the riders in proportion to their distances traveled. As a result, each mile costs the same amount.</p>
 
-        <input type="radio" id="op6" name="algorithm" value="segmented">
-        <label for="op6">Split by segment</label><br>
+    <h3>Split by segment</h3>
+    <p>While there are <i>n</i> riders in the cab, the fare for that segment is equally split <i>n</i> ways among them. When someone gets out, a new segment begins.</p>
 
-        <input type="radio" id="op7" name="algorithm" value="talmudic">
-        <label for="op7">Game-theoretic (Talmudic)</label><br>
-    </div>
-
-    <br>
-
-    <button onclick="processString()">Submit</button>
-
-    <br><br>
-
-    <div>
-        <h3>Result:</h3>
-        <div id="result">No result yet</div>
-    </div>
+    <h3>Game-theoretic (Talmudic)</h3>
+    <p>The riders pairwise satisfy the <a href="https://en.wikipedia.org/wiki/Cooperative_bargaining#Nash_bargaining_solution" target="_blank">Nash bargaining solution</a>. It's explained excellently by <a href="https://www.youtube.com/watch?v=uNemXgZ-MWY" target="_blank">this Mathologer video</a>. This algorithm achieves values given in a Talmudic example.</p>
 
     <script>
         function indexSorted(arr) {
