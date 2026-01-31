@@ -3,7 +3,7 @@
 * * Version 4.1.1 | 2026-01-16
 * Robert Birming | robertbirming.com
 *
-* Modified by Dan 2026-01-18
+* Modified by Dan 2026-01-31
 */
 
 :root {
@@ -47,7 +47,7 @@ html {
 body {
   margin: 0 auto;
   padding: 2.2rem 1.25rem 1.5rem;
-  max-width: 65ch;
+  max-width: 75ch;
   font-family: var(--font-body);
   font-size: 1.0625rem;
   line-height: 1.65;
