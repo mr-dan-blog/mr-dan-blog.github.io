@@ -1,0 +1,68 @@
+@import "/stylesheet/main.css";
+
+:root {
+    --err-strong: color-mix(in srgb, red 50%, var(--text));
+    --err-weak: color-mix(in srgb, red 10%, var(--bg));
+}
+
+input,
+select {
+    font-family: var(--font-code);
+    font-size: var(--font-small);
+
+    &.coord {
+        max-width: 6rem;
+    }
+
+    &[type="number"] {
+        max-width: 4rem;
+    }
+
+    &:invalid {
+        border-color: var(--err-strong);
+        background-color: var(--err-weak);
+    }
+}
+
+.canvas-frame {
+    justify-content: center;
+    position: sticky;
+    top: 10px;
+    max-width: 95%;
+    background-color: var(--bg);
+    justify-self: center;
+    box-shadow: 0 0 0.25em var(--muted);
+}
+
+canvas {
+    flex-grow: 1;
+    flex-shrink: 1;
+}
+
+.card {
+    margin: 2rem 0;
+
+    :first-child {
+        margin-top: 0;
+    }
+
+    summary>h3 {
+        display: inline-block;
+    }
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-row {
+    display: flex;
+    width: 100%;
+    gap: 1rem;
+}
+
+.row {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
