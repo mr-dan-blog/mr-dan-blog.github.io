@@ -1,6 +1,8 @@
-# Danonymous
-Tinkerings from [Danonymous](https://danonymous.blog) (A.K.A. Mr. Dan)
+Blog: [Danonymous](https://danonymous.blog)
 
 ## Projects
-[Taxi Fares](/taxi/)
-[Sunplot](/sunplot/)
+### [Taxi Fares](/taxi/)
+Calculator for possible solutions to the [taxi problem](https://danonymous.blog/taxi)
+
+### [Sunplot](/sunplot/)
+Beautiful plots of the sun's position in the sky over time
