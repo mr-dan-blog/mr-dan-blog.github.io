@@ -17,6 +17,10 @@
   --muted: color-mix(in srgb, var(--text) 70%, transparent);
   --surface: color-mix(in srgb, var(--text) 3%, var(--bg));
   --border: color-mix(in srgb, var(--text) 12%, transparent);
+
+  --err-strong: color-mix(in srgb, red 50%, var(--text)); /* Dan */
+  --err-weak: color-mix(in srgb, red 10%, var(--bg)); /* Dan */
+
   --font-small: 0.95rem;
   --radius: 3px;
   --radius-lg: 12px;
@@ -37,7 +41,9 @@
   }
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -61,7 +67,12 @@ p {
   margin: 1.2em 0;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   color: var(--header);
   font-family: var(--font-header);
   margin: 2rem 0 0.8rem;
@@ -69,10 +80,21 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.3;
 }
 
-h1 { font-size: 1.7rem; }
-h2 { font-size: 1.4rem; }
-h3 { font-size: 1.25rem; }
-h4 { font-size: 1.1rem; }
+h1 {
+  font-size: 1.7rem;
+}
+
+h2 {
+  font-size: 1.4rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
+h4 {
+  font-size: 1.1rem;
+}
 
 a {
   color: var(--link);
@@ -168,7 +190,7 @@ thead th {
   border-bottom: 1px solid var(--border);
 }
 
-tbody tr + tr td {
+tbody tr+tr td {
   border-top: 1px solid var(--border);
 }
 
@@ -206,11 +228,11 @@ main h1 {
   margin: 0;
 }
 
-main h1 + p {
+main h1+p {
   margin: 0 0 1.5rem;
 }
 
-.page main > h1:first-of-type {
+.page main>h1:first-of-type {
   margin: 0 0 1.5rem;
 }
 
@@ -222,7 +244,7 @@ time {
   white-space: nowrap;
 }
 
-h4 + p + .embedded.blog-posts {
+h4+p+.embedded.blog-posts {
   margin-top: 0.5rem;
 }
 
@@ -242,7 +264,7 @@ h4 + p + .embedded.blog-posts {
 }
 
 /* Upvote button */
-#upvote-form > small {
+#upvote-form>small {
   display: block;
   margin-top: 1.5rem;
 }
@@ -310,7 +332,7 @@ footer p {
   margin: 0;
 }
 
-footer > span {
+footer>span {
   display: block;
   margin-top: 0.5rem;
 }
@@ -324,47 +346,47 @@ footer > span {
 
 /* card class (Dan) */
 .card {
-    background: var(--surface);
-    border-radius: var(--radius-lg);
-    box-sizing: border-box;
-    padding: 1rem;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-sizing: border-box;
+  padding: 1rem;
 }
 
 
 /* Footnote reference arrow (Dan) */
 .footnote {
-    font-family: var(--font-code);
-    padding-left: 0.5rem;
+  font-family: var(--font-code);
+  padding-left: 0.5rem;
 }
 
 /* Buttons (Dan) */
 button {
-    padding: 10px 15px;
-    background-color: #ddd;
-    border-radius: 5px;
-    border: 0;
-    font-family: var(--body);
-    font-size: 1.0rem;
+  padding: 10px 15px;
+  background-color: #ddd;
+  border-radius: 5px;
+  border: 0;
+  font-family: var(--body);
+  font-size: 1.0rem;
 }
 
 /* Input fields (Dan) */
 input,
 select {
-    font-family: var(--font-code);
-    font-size: var(--font-small);
+  font-family: var(--font-code);
+  font-size: var(--font-small);
 
-    &.coord {
-        max-width: 6rem;
-    }
+  &.coord {
+    max-width: 6rem;
+  }
 
-    &[type="number"] {
-        max-width: 4rem;
-    }
+  &[type="number"] {
+    max-width: 4rem;
+  }
 
-    &:invalid {
-        border-color: var(--err-strong);
-        background-color: var(--err-weak);
-    }
+  &:invalid {
+    border-color: var(--err-strong);
+    background-color: var(--err-weak);
+  }
 }
 
 /* Image caption */
@@ -388,8 +410,8 @@ span.caption {
   cursor: pointer !important;
 }
 
-.bearming-gallery > ul,
-.bearming-gallery > ol {
+.bearming-gallery>ul,
+.bearming-gallery>ol {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 0.55rem;
@@ -451,8 +473,9 @@ span.caption {
 }
 
 @media (max-width: 480px) {
-  .bearming-gallery > ul,
-  .bearming-gallery > ol {
+
+  .bearming-gallery>ul,
+  .bearming-gallery>ol {
     grid-template-columns: 1fr 1fr;
     gap: 0.4rem;
   }
