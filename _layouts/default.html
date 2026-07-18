@@ -19,7 +19,7 @@
 <body>
   <div class="wrapper">
     <header>
-      <a class="title" href="/">{{ site.title }}</a>
+      <a class="title" href="/"><h1>{{ site.title }}</h1></a>
       <nav>
         <p>
           <a href="/">Home</a>
@@ -42,8 +42,8 @@
     </header>
     <section>
       <h1>{{ page.title }}</h1>
-      {% if site.github.is_project_page %}
-      <a href="{{ site.github.repository_url }}">View the Project on GitHub <small>{{ site.github.repository_nwo
+      {% if page.github_link %}
+      <a href="{{ page.github_link }}">View project source on GitHub<small>{{ site.github.repository_nwo
           }}</small></a>
       {% endif %}
 
