@@ -1,7 +1,4 @@
----
-layout: default
-title: Tinkerings
----
+# Tinkerings
 ## About
 This page hosts projects by [Danonymous](https://danonymous.blog), A.K.A. Mr. Dan.
 
