@@ -1,3 +1,4 @@
 theme: jekyll-theme-minimal
 title: Mr. Dan's Tinkerings
-description: By Danonymous
+github:
+  is_project_page: true
