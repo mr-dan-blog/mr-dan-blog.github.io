@@ -19,19 +19,17 @@
 <body>
   <div class="wrapper">
     <header>
-      <h1>{{ site.title }}</h1>
+      <a class="title" href="/">{{ site.title }}</a>
       <nav>
         <p>
-          <a href="{{ " /" | absolute_url }}">Home</a>
+          <a href="/">Home</a>
           <a href="{{ site.github.owner_url }}">GitHub</a>
           <a href="https://danonymous.blog">Main Site</a>
           {% if site.logo %}
           <img src="{{site.logo | relative_url}}" alt="Logo" />
           {% endif %}
-        {% comment %} <p>{{ site.description | default: site.github.project_tagline }}</p> {% endcomment %}
-        {% if site.github.is_project_page %}
-        <a href="{{ site.github.repository_url }}">View the Project on GitHub <small>{{ site.github.repository_nwo }}</small></a>
-        {% endif %}
+          {% comment %}
+        <p>{{ site.description | default: site.github.project_tagline }}</p> {% endcomment %}
         {% if site.show_downloads %}
         <ul class="downloads">
           <li><a href="{{ site.github.zip_url }}">Download <strong>ZIP File</strong></a></li>
@@ -43,16 +41,21 @@
       </nav>
     </header>
     <section>
-      <h2>{{ page.title }}</h2>
+      <h1>{{ page.title }}</h1>
+      {% if site.github.is_project_page %}
+      <a href="{{ site.github.repository_url }}">View the Project on GitHub <small>{{ site.github.repository_nwo
+          }}</small></a>
+      {% endif %}
 
       {{ content }}
 
     </section>
     <footer>
-      {% if site.github.is_project_page %}
-      <p>A project by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a></p>
+      <p>
+      {% if page.github_link %}
+      <a href="{{ page.github_link }}">Project source code</a></p>
       {% endif %}
-      <p><small>By <a href="https://danonymous.blog">Danonymous</a></small></p>
+      <small>By <a href="https://danonymous.blog">Danonymous</a></small></p>
       {% comment %} <p><small>Hosted on GitHub Pages &mdash; Theme by <a
             href="https://github.com/orderedlist">orderedlist</a></small></p> {% endcomment %}
     </footer>
