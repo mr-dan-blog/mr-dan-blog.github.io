@@ -14,12 +14,17 @@
   <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
     <![endif]-->
+  {% for line in page.head_extras %}
+  {{ line }}
+  {% endfor %}
 </head>
 
 <body>
   <div class="wrapper">
     <header>
-      <a class="title" href="/"><h1>{{ site.title }}</h1></a>
+      <a class="title" href="/">
+        <h1>{{ site.title }}</h1>
+      </a>
       <nav>
         <p>
           <a href="/">Home</a>
@@ -53,8 +58,9 @@
     </section>
     <footer>
       <p>
-      {% if page.github_link %}
-      <a href="{{ page.github_link }}">Project source code</a></p>
+        {% if page.github_link %}
+        <a href="{{ page.github_link }}">Project source code</a>
+      </p>
       {% endif %}
       <small>By <a href="https://danonymous.blog">Danonymous</a></small></p>
       {% comment %} <p><small>Hosted on GitHub Pages &mdash; Theme by <a
