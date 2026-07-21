@@ -1,1 +1,1 @@
-This page hosts projects by [Danonymous](https://danonymous.blog), A.K.A. Mr. Dan.
+This page hosts projects by [Danonymous](https://danonymous.blog), A.K.A. Mr. Dan. View live at [projects.danonymous.blog](https://projects.danonymous.blog).
