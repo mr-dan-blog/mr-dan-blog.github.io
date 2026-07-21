@@ -360,7 +360,7 @@ footer>span {
 }
 
 /* Buttons (Dan) */
-button {
+button, a.button {
   padding: 10px 15px;
   background-color: #ddd;
   border-radius: 5px;
