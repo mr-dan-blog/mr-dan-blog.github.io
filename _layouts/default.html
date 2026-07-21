@@ -19,21 +19,7 @@
 
   <body>
     <div class="wrapper">
-      <header>
-        <a class="title" href="/">
-          <h1>{{ site.title }}</h1>
-        </a>
-        <nav>
-          <p>
-            <a href="/">Home</a>
-            <a href="{{ site.github.owner_url }}">GitHub</a>
-            <a href="https://danonymous.blog">Main Site</a>
-            {% if site.logo %}
-              <img src="{{site.logo | relative_url}}" alt="Logo" />
-            {% endif %}
-          </p>
-        </nav>
-      </header>
+      {% include header.html %}
       <section>
         {% if page.display_title %}
           <h1>{{ page.title }}</h1>
@@ -47,18 +33,7 @@
         {{ content }}
 
       </section>
-      <footer>
-        {% if page.github_link %}
-          <p>
-            <a href="{{ page.github_link }}">Project source code</a>
-          </p>
-        {% endif %}
-        <p>
-          <small>By
-            <a href="https://danonymous.blog">Danonymous</a>
-          </small>
-        </p>
-      </footer>
+      {% include footer.html %}
     </div>
   </body>
 

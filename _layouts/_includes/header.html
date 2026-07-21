@@ -1,0 +1,15 @@
+<header>
+  <a class="title" href="/">
+    <h1>{{ site.title }}</h1>
+  </a>
+  <nav>
+    <p>
+      <a href="/">Home</a>
+      <a href="{{ site.github.owner_url }}">GitHub</a>
+      <a href="https://danonymous.blog">Main Site</a>
+      {% if site.logo %}
+        <img src="{{site.logo | relative_url}}" alt="Logo" />
+      {% endif %}
+    </p>
+  </nav>
+</header>
